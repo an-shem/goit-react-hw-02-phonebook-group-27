@@ -1,0 +1,15 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+}
+
+.listItem {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 0.03em;
+}
+.listItem:not(:last-child) {
+  margin-bottom: 4px;
+}

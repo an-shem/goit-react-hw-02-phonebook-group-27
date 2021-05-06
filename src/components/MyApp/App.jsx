@@ -12,6 +12,7 @@ class App extends Component {
   state = {
     contacts: [],
     name: '',
+    number: '',
   };
 
   handleChange = e => {
@@ -21,26 +22,28 @@ class App extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const { name, number } = this.state;
     const newContact = {
       id: uuidv4(),
-      name: this.state.name,
+      name,
+      number,
     };
     this.state.contacts.push(newContact);
-    console.log(this.state);
     this.reset();
   };
 
   reset = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
-    const { name, contacts } = this.state;
+    const { name, number, contacts } = this.state;
     return (
       <Container>
         <Section title="Phonebook">
           <Form
             name={name}
+            number={number}
             formSabmitHandle={this.handleSubmit}
             formChangeHandle={this.handleChange}
           />

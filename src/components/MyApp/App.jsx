@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-// uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 
 import Container from '../Container';
 import Section from '../Section';
@@ -11,12 +10,7 @@ import Filter from '../Filter';
 
 class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -27,8 +21,7 @@ class App extends Component {
 
   handleFormSubmit = ({ name, number }) => {
     if (this.nameVerification(name)) {
-      const text = `${name} is already in contacts`;
-      alert(text);
+      alert(`${name} is already in contacts`);
       return;
     }
     const newContact = {
@@ -59,11 +52,7 @@ class App extends Component {
           <ContactForm onSubmit={this.handleFormSubmit} />
         </Section>
         <Section title="Contacts">
-          <Filter
-            filter={filter}
-            searchChange={this.handleChange}
-            handleBlur={this.handleBlurInput}
-          />
+          <Filter filter={filter} filterChange={this.handleChange} />
           <ContactList
             contacts={contacts}
             filter={filter}

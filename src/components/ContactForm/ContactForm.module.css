@@ -1,9 +1,8 @@
 .form {
   padding: 14px;
-  font-style: normal;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 22px;
+  font-size: 18px;
+  line-height: 20px;
   letter-spacing: 0.03em;
   border: 1px solid #2c2a2a;
 }
@@ -16,6 +15,7 @@
 .input {
   margin-bottom: 24px;
   padding: 4px 0px 4px 10px;
+  /* width: 80%; */
   border: 1px solid #89888ba6;
   outline: none;
 }

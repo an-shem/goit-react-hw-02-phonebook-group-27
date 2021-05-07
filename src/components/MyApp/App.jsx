@@ -4,15 +4,20 @@ import { v4 as uuidv4 } from 'uuid';
 
 import Container from '../Container';
 import Section from '../Section';
-import Form from '../Form';
-import Contacts from '../Contacts';
+import ContactForm from '../ContactForm';
+import ContactList from '../ContactList';
+import Filter from '../Filter';
 // import styles from './App.module.css';
 
 class App extends Component {
   state = {
-    contacts: [],
-    name: '',
-    number: '',
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    filter: '',
   };
 
   handleChange = e => {
@@ -20,36 +25,29 @@ class App extends Component {
     this.setState({ [name]: value });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const { name, number } = this.state;
+  handleFormSubmit = ({ name, number }) => {
     const newContact = {
       id: uuidv4(),
       name,
       number,
     };
-    this.state.contacts.push(newContact);
-    this.reset();
-  };
-
-  reset = () => {
-    this.setState({ name: '', number: '' });
+    this.setState({ contacts: [...this.state.contacts, newContact] });
   };
 
   render() {
-    const { name, number, contacts } = this.state;
+    const { filter, contacts } = this.state;
     return (
       <Container>
         <Section title="Phonebook">
-          <Form
-            name={name}
-            number={number}
-            formSabmitHandle={this.handleSubmit}
-            formChangeHandle={this.handleChange}
-          />
+          <ContactForm onSubmit={this.handleFormSubmit} />
         </Section>
         <Section title="Contacts">
-          <Contacts contacts={contacts} />
+          <Filter
+            filter={filter}
+            searchChange={this.handleChange}
+            handleBlur={this.handleBlurInput}
+          />
+          <ContactList contacts={contacts} filter={filter} />
         </Section>
       </Container>
     );

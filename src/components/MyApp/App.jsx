@@ -26,12 +26,21 @@ class App extends Component {
   };
 
   handleFormSubmit = ({ name, number }) => {
+    if (this.nameVerification(name)) {
+      const text = `${name} is already in contacts`;
+      alert(text);
+      return;
+    }
     const newContact = {
       id: uuidv4(),
       name,
       number,
     };
     this.setState({ contacts: [...this.state.contacts, newContact] });
+  };
+
+  nameVerification = name => {
+    return this.state.contacts.some(contact => name === contact.name);
   };
 
   render() {
